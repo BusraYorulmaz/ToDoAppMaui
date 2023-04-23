@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiAppToDo.MainPage"
+             BackgroundColor="{StaticResource Primary}"
+             NavigationPage.HasNavigationBar="False">
+    <Grid>
+        <StackLayout Margin="20,0,20,0">
+            
+            <!--logo-->
+            <Image Source="todoapplogo.png" HeightRequest="250"/>
+            
+            <!--Text-->
+            <StackLayout Margin="0,0,0,20">
+                <!-- <Label Style="{StaticResource Welcome}"  Text="To-Do App"/> -->
+                <Label Style="{StaticResource TextStyle}" HorizontalOptions="Center" Text="Sign İn to continue" FontSize="18" FontAttributes="Bold"/>
+            </StackLayout>
+
+            <StackLayout>
+
+                <!--user name-->
+                <Label Style="{StaticResource TextStyle}" Text="User Name"/>
+                <Grid Margin="0,5,0,20">
+                    <Frame BackgroundColor="{StaticResource Secondary}" CornerRadius="4"/>
+                    <Entry Placeholder=" Enter username"  x:Name="EnterUserName"  PlaceholderColor="DarkGray"/>
+                </Grid>
+
+                <!--password-->
+                <Label Style="{StaticResource TextStyle}" Text="Password"/>
+                <Grid Margin="0,5">
+                    <Frame BackgroundColor="{StaticResource Secondary}" CornerRadius="4"/>
+                    <Entry Placeholder="Enter password" PlaceholderColor="DarkGray" IsPassword="True" x:Name="EnterPassword"  />
+                </Grid>
+
+                <!--button-->
+                <Button x:Name="BtnMoveToToDoPage" Clicked="BtnMoveToToDoPage_Clicked" 
+                    Margin="0,30,0,5" CornerRadius="4" BackgroundColor="{StaticResource Secondary}" 
+                        Text="Sign In" TextColor="{StaticResource Primary}" FontFamily="OpenSansSemibold" />
+
+                
+
+            </StackLayout>
+
+        </StackLayout>
+    </Grid>
+
+
+</ContentPage>

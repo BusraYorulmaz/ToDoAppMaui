@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<mct:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mct="clr-namespace:CommunityToolkit.Maui.Views;assembly=CommunityToolkit.Maui"
+             x:Class="MauiToolkitPopupSample.PopupPageAddToDo"
+             xmlns:viewmodel="clr-namespace:MauiAppToDo.ViewModel"
+             xmlns:models="clr-namespace:MauiAppToDo.Models"
+             x:DataType="viewmodel:MainViewModel"
+           CanBeDismissedByTappingOutsideOfPopup="True">
+    
+    <VerticalStackLayout BackgroundColor="White" WidthRequest="250" >
+        
+        <Label 
+            Margin="15"
+            Text="Add To-Do!"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center"
+            FontSize="28"
+            FontAttributes="Bold"/>
+
+        <Editor 
+                Placeholder="Enter Your ToDo"
+                Margin="20" 
+                FontSize="20"
+                Text="{Binding To_do}"
+                x:Name="ToDoNameEntry"
+                />
+
+        <Button Margin="10" 
+                Text="Add" 
+                Command="{Binding AddToDoCommand}" 
+                FontSize="20"/>
+        
+    </VerticalStackLayout>
+</mct:Popup>

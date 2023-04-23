@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiAppToDo.ToDoPage"
+             xmlns:viewmodel="clr-namespace:MauiAppToDo.ViewModel"
+             xmlns:models="clr-namespace:MauiAppToDo.Models"
+             x:DataType="viewmodel:MainViewModel"
+             Title="To Do Page"
+             BackgroundColor="{StaticResource Blue200Accent}">
+
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="BtnPopup" 
+                     Text="Add To Do" 
+                     Clicked="BtnClickedPopup"/>
+    </ContentPage.ToolbarItems>
+
+    <ScrollView>
+        <VerticalStackLayout Margin="20">
+
+            <Grid ColumnDefinitions="*,*,*">
+                <Label Grid.Column="0" 
+                       Text="Welcome!" 
+                       FontSize="23"   
+                       FontAttributes="Bold"></Label>
+                <Label Grid.Column="1"    
+                       x:Name="LblUserName" 
+                       FontSize="23"   
+                       FontAttributes="Bold"></Label>
+            </Grid>
+
+            <!--Add to do-->
+            <Entry Placeholder="Add To Do" 
+                   TextColor="{StaticResource Primary}"
+                   PlaceholderColor="{StaticResource Primary}" 
+                   FontAttributes="Bold" 
+                   FontSize="14" 
+                   Text="{Binding To_do}" 
+                   Margin="0,15,0,0"
+                   x:Name="ToDoNameEntry"/>
+
+            <Button Text="Add" 
+                    FontSize="16" 
+                    Command="{Binding AddToDoCommand}" 
+                    Padding="0,10,0,10" 
+                    CornerRadius="4"/>
+
+            <!--ToDo List-->
+            <Label Margin="0,15,0,5" Text="To Do List" FontSize="20" FontAttributes="Bold" />
+            <CollectionView ItemsSource="{Binding TodoItems}">
+               
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="{x:Type x:String}">
+                        <SwipeView Margin="5">
+                            <SwipeView.RightItems>
+                                <SwipeItems>
+                                    <SwipeItem IconImageSource="dotnet_bot" BackgroundColor="Red"
+                                               Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainViewModel}},Path=DeleteCommand}"
+                                               CommandParameter="{Binding .}"/>
+                                    <SwipeItem IconImageSource="dotnet_bot" BackgroundColor="Green" />
+                                </SwipeItems> 
+                            </SwipeView.RightItems>
+                            <Frame Margin="0,5,0,0" CornerRadius="4" BorderColor="{StaticResource Primary}">
+                                
+                                <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
+
+                                    <Button Margin="0,5,10,0" WidthRequest="17" HeightRequest="17" CornerRadius="2"  
+                                            BorderWidth="1" BorderColor="Black" BackgroundColor="White"
+                                        x:Name="checkBox"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainViewModel}},Path=ComplatedCommand}"
+                                            CommandParameter="{Binding .}">
+                                    </Button>
+                                    
+                                    <Label Text="{Binding .}" HorizontalOptions="StartAndExpand" FontSize="16"></Label>
+                                
+                                    <Label FontFamily="FaSolid" Text="{x:Static models:FaSolidIcons.AngleLeft}" 
+                                           HorizontalOptions="EndAndExpand" FontSize="22"></Label>
+                                </StackLayout>
+                            </Frame>
+                        </SwipeView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+
+            <!--complated list-->
+            <Label Margin="0,15,0,5" Text="Completed" FontSize="20" 
+                       FontAttributes="Bold" />
+            <CollectionView ItemsSource="{Binding ComplatedList}">
+               
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="{x:Type x:String}">
+
+                        <Frame CornerRadius="4" Margin="4" 
+                               BackgroundColor="DimGray" 
+                               BorderColor="{StaticResource Primary}">
+                            <HorizontalStackLayout>
+                                <CheckBox x:Name="checkBox" IsChecked="True"></CheckBox>
+                                <Label Text="{Binding .}"
+                                       FontSize="Medium">
+                                    <Label.Triggers>
+                                        <DataTrigger Binding="{Binding Source={x:Reference checkBox},Path=IsChecked}"
+                                                     TargetType="Label"
+                                                     Value="True">
+                                            <Setter Property="TextDecorations"
+                                                    Value="Strikethrough"/>
+                                        </DataTrigger>
+                                    </Label.Triggers>
+                                </Label>
+                            </HorizontalStackLayout>
+                        </Frame>
+
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+ 
+            
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

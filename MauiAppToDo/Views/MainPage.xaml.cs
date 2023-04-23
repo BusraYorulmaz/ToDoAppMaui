@@ -13,7 +13,6 @@ public partial class MainPage : ContentPage
     public MainPage()
 	{
 		InitializeComponent();
-
         
 		//string name = Preferences.Get("UserName", "");//preferences den adı yükle
        // EnterUserName.Text = name;

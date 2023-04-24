@@ -1,16 +1,22 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using MauiAppToDo.Models;
+using MauiAppToDo.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace MauiAppToDo.ViewModel;
 
 public partial class MainViewModel : ObservableObject
 {
+
+
+
     [ObservableProperty]
     String to_do;
 
@@ -19,14 +25,14 @@ public partial class MainViewModel : ObservableObject
 
     [ObservableProperty]
     ObservableCollection<String> complatedList;
-    
+
 
     public MainViewModel()
     {
         TodoItems = new ObservableCollection<String>();
-        ComplatedList= new ObservableCollection<String>();
+        ComplatedList = new ObservableCollection<String>();
     }
- 
+
 
     [RelayCommand]
     void AddToDo()
@@ -40,7 +46,7 @@ public partial class MainViewModel : ObservableObject
     [RelayCommand]
     void Delete(string del)
     {
-        if(TodoItems.Contains(del))
+        if (TodoItems.Contains(del))
         {
             TodoItems.Remove(del);
         }
@@ -58,13 +64,13 @@ public partial class MainViewModel : ObservableObject
     [RelayCommand]
     void Complated(string completedTodo)
     {
-       
-            ComplatedList.Add(completedTodo);
-            TodoItems.Remove(completedTodo);
-       
+
+        ComplatedList.Add(completedTodo);
+        TodoItems.Remove(completedTodo);
+
     }
 
 
- 
+
 
 }

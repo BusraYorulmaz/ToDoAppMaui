@@ -10,6 +10,8 @@ namespace MauiAppToDo;
 public partial class MainPage : ContentPage
 {
     private readonly LoginService _loginService = new LoginService();
+   
+
     public MainPage()
 	{
 		InitializeComponent();
@@ -36,6 +38,7 @@ public partial class MainPage : ContentPage
                 //{
                 //    await Navigation.PushAsync(new ToDoPage(new MainViewModel(), EnterUserName.Text));
                 //}
+                
                 await Navigation.PushAsync(new ToDoPage(new MainViewModel(), EnterUserName.Text));
 
             }

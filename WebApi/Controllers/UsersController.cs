@@ -18,6 +18,8 @@ namespace WebApi.Controllers
             _ApiDbContext = apiDbContext;
         }
 
+
+        //All Users
         [HttpGet]
         public async Task<IActionResult> GetUsers()
         {
@@ -32,6 +34,9 @@ namespace WebApi.Controllers
             return Ok(users);
         }
 
+
+
+        // Login 
         [HttpGet("[action]")]
         public  IActionResult UserLogin([FromQuery] string UserName, string UserPassword)
         {

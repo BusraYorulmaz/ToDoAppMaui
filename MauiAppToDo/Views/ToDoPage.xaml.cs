@@ -11,9 +11,9 @@ public partial class ToDoPage : ContentPage
 	{
 		InitializeComponent();
         BindingContext= mvm;
-        
+
         //preferences den adý yükle
-       // userName = Preferences.Get("UserName", "");
+        // userName = Preferences.Get("UserName", "");
         LblUserName.Text = userName; //ismi bu sayfaya taþýrken
     }
 

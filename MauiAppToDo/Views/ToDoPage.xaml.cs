@@ -15,7 +15,7 @@ public partial class ToDoPage : ContentPage
         string  userName = Preferences.Get("UserName",string.Empty);
         string userEmail = Preferences.Get("UserEmail", string.Empty);
            
-        LblUserName.Text = userName; //ismi bu sayfaya taþýrken
+        LblUserName.Text = userName;  
         LblUserEmail.Text = userEmail;
     }
 

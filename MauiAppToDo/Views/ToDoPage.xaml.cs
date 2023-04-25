@@ -14,16 +14,13 @@ public partial class ToDoPage : ContentPage
 
         string  userName = Preferences.Get("UserName",string.Empty);
         string userEmail = Preferences.Get("UserEmail", string.Empty);
-        //preferences den adý yükle
-        // userName = Preferences.Get("UserName", "");
+           
         LblUserName.Text = userName; //ismi bu sayfaya taþýrken
         LblUserEmail.Text = userEmail;
     }
 
      private void BtnClickedPopup(object sender, EventArgs e)
     {
-    
-
         this.ShowPopup(new PopupPageAddToDo());
     }
 

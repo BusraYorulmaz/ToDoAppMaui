@@ -11,14 +11,11 @@ public partial class MainPage : ContentPage
 {
     private readonly LoginService _loginService = new LoginService();
    
-
     public MainPage()
 	{
-		InitializeComponent();
-        
+		InitializeComponent(); 
 		//string name = Preferences.Get("UserName", "");//preferences den adı yükle
-       // EnterUserName.Text = name;
-
+        // EnterUserName.Text = name;
     }
 
     private async void  BtnMoveToToDoPage_Clicked(object sender, EventArgs e)
@@ -29,17 +26,16 @@ public partial class MainPage : ContentPage
         if (userName!=null && userPassword!=null)
         {
             var users=await _loginService.Login(userName, userPassword);
-            if (users!=null)
-            {
-                // Preferences.Set("UserName", userName); //preferences den adı kaydet
-                //bool result = await DisplayAlert("Saved", "Name has been saved", "Ok", "Cancel");//kaydedildiğine dair bir mesaj ve yönlendirme
-
-                //if (result)
-                //{
-                //    await Navigation.PushAsync(new ToDoPage(new MainViewModel(), EnterUserName.Text));
-                //}
+            if (users != null) 
+            {         
                 
-                await Navigation.PushAsync(new ToDoPage(new MainViewModel(), EnterUserName.Text));
+                //Bilgiler preferencese kaydedilir 
+                Preferences.Set("UserId",users.Id.ToString());
+                Preferences.Set("UserName", users.UserName);
+                Preferences.Set("UserEmail", users.UserEmail);
+                Preferences.Set("UserPassword", users.UserPassword);
+
+               await Navigation.PushAsync(new ToDoPage(new MainViewModel()));
 
             }
             else

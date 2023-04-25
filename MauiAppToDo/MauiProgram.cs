@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Maui;
+using MauiAppToDo.Services;
 using MauiAppToDo.ViewModel;
 
 namespace MauiAppToDo;
@@ -20,6 +21,7 @@ public static class MauiProgram
             });
 		builder.Services.AddSingleton<ToDoPage>();
         builder.Services.AddSingleton<MainViewModel>();
+	
 
         return builder.Build();
 	}

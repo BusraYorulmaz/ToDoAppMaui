@@ -27,6 +27,10 @@
                        x:Name="LblUserName" 
                        FontSize="23"   
                        FontAttributes="Bold"></Label>
+                <Label Grid.Column="2"    
+                       x:Name="LblUserEmail" 
+                       FontSize="23"   
+                       FontAttributes="Bold"></Label>
             </Grid>
 
             <!--Add to do-->

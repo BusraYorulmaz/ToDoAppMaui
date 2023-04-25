@@ -14,8 +14,12 @@ namespace MauiAppToDo.ViewModel;
 
 public partial class MainViewModel : ObservableObject
 {
+    private ToDoListService toDoListService;
 
-
+    /*public MainViewModel(ToDoListService toDoListService)
+    {
+        this.toDoListService = toDoListService;
+    }*/
 
     [ObservableProperty]
     String to_do;
@@ -26,7 +30,7 @@ public partial class MainViewModel : ObservableObject
     [ObservableProperty]
     ObservableCollection<String> complatedList;
 
-
+    
     public MainViewModel()
     {
         TodoItems = new ObservableCollection<String>();
@@ -51,15 +55,6 @@ public partial class MainViewModel : ObservableObject
             TodoItems.Remove(del);
         }
     }
-
-    /*
-    private bool isChecked;
-    public bool IsChecked
-    {
-        get => isChecked;
-        set => SetProperty(ref isChecked, value);
-    }
-    */
 
     [RelayCommand]
     void Complated(string completedTodo)

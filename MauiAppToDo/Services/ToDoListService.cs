@@ -11,6 +11,7 @@ namespace MauiAppToDo.Services
 {
     public class ToDoListService
     {
+        private const string ApiUrl = "https://localhost:44356/api/ToDos";
         private readonly HttpClient _httpClient;
 
         public ToDoListService()
@@ -20,7 +21,7 @@ namespace MauiAppToDo.Services
 
         public async Task<ToDoLists> ToDoLists(int userId,ToDoLists toDoLists)
         {
-            var response = await _httpClient.PostAsJsonAsync($"https://localhost:44356/api/ToDos/{userId}",toDoLists);
+            var response = await _httpClient.PostAsJsonAsync($"{ApiUrl}/{userId}",toDoLists);
 
             response.EnsureSuccessStatusCode();
             var createdToDoList = await response.Content.ReadFromJsonAsync<ToDoLists>();

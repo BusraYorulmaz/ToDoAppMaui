@@ -5,7 +5,7 @@ VisualStudioVersion = 17.0.31611.283
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MauiAppToDo", "MauiAppToDo\MauiAppToDo.csproj", "{66528825-816C-4068-9C9C-9E3BAF5D3B7F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi", "WebApi\WebApi.csproj", "{5038FA51-76A2-4E73-848F-C88F6065148A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi", "WebApi\WebApi.csproj", "{5038FA51-76A2-4E73-848F-C88F6065148A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

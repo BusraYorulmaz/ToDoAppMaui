@@ -14,13 +14,7 @@ namespace MauiAppToDo.ViewModel;
 
 public partial class MainViewModel : ObservableObject
 {
-    private ToDoListService toDoListService;
-
-    /*public MainViewModel(ToDoListService toDoListService)
-    {
-        this.toDoListService = toDoListService;
-    }*/
-
+   
     [ObservableProperty]
     String to_do;
 

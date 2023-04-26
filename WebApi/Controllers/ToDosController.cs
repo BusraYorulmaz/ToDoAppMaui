@@ -19,13 +19,6 @@ namespace WebApi.Controllers
         [HttpPost("{userId}")]
         public async Task<IActionResult> AddToDoList(int userId , [FromBody] ToDoLists toDoLists)
         {
-            //kullanıcı var mı kontrol ediyoruz
-           /* var user = await _ApiDbContext.Users.FindAsync(userId);
-            if (user == null)
-            {
-                return NotFound();
-            }*/
-
             // yeni bir todo ekliyoruz
             toDoLists.UserId= userId;
             _ApiDbContext.ToDoLists.Add(toDoLists);

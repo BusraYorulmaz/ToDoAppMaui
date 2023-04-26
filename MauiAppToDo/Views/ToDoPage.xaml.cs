@@ -12,6 +12,7 @@ public partial class ToDoPage : ContentPage
 		InitializeComponent();
         BindingContext= mvm;
 
+        //preferences de kaydolan veriler çaðýrýlýr 
         string  userName = Preferences.Get("UserName",string.Empty);
         string userEmail = Preferences.Get("UserEmail", string.Empty);
            

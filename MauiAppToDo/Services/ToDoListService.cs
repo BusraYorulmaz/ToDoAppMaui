@@ -11,7 +11,7 @@ namespace MauiAppToDo.Services
 {
     public class ToDoListService
     {
-        private const string ApiUrl = "https://localhost:44356/api/ToDos";
+        private const string ApiUrl = "https://localhost:7072/api";
         private readonly HttpClient _httpClient;
 
         public ToDoListService()
@@ -20,13 +20,33 @@ namespace MauiAppToDo.Services
         }
 
         public async Task<ToDoLists> ToDoLists(int userId,ToDoLists toDoLists)
-        {
-            var response = await _httpClient.PostAsJsonAsync($"{ApiUrl}/{userId}",toDoLists);
-
+        {          
+            var response = await _httpClient.PostAsJsonAsync($"{ApiUrl}/ToDos/AddToDoList?userId={userId}",toDoLists);
             response.EnsureSuccessStatusCode();
-            var createdToDoList = await response.Content.ReadFromJsonAsync<ToDoLists>();
+            var createdToDoList = await response.Content.ReadFromJsonAsync<ToDoLists>(); 
             return createdToDoList;
- 
         }
+
+        //belirli bir kullanıcıya ait tüm todo listelerini getirmek için
+        public async Task<List<ToDoLists>> GetToDoLists(int userId)
+        {
+            //https://localhost:44356/api/ToDos/GetToDoLists?userId={userId}
+            var response = await _httpClient.GetAsync($"{ApiUrl}/ToDos/GetToDoLists?userId={userId}");
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<List<ToDoLists>>(content);
+            }
+            return null;
+        }
+
+        public async Task<bool> DeleteToDoList(int id)
+        {
+            //https://localhost:7072/api/ToDos/DeleteToDoList?id=6
+            var response = await _httpClient.PostAsync($"{ApiUrl}/ToDos/DeleteToDoList?id={id}", null);
+            return response.IsSuccessStatusCode;
+        }
+
+
     }
 }

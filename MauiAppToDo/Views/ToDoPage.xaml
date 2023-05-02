@@ -55,15 +55,7 @@
                
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="{x:Type x:String}">
-                        <SwipeView Margin="5">
-                            <SwipeView.RightItems>
-                                <SwipeItems>
-                                    <SwipeItem IconImageSource="dotnet_bot" BackgroundColor="Red"
-                                               Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainViewModel}},Path=DeleteCommand}"
-                                               CommandParameter="{Binding .}"/>
-                                    <SwipeItem IconImageSource="dotnet_bot" BackgroundColor="Green" />
-                                </SwipeItems> 
-                            </SwipeView.RightItems>
+                      
                             <Frame Margin="0,5,0,0" CornerRadius="4" BorderColor="{StaticResource Primary}">
                                 
                                 <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
@@ -76,12 +68,12 @@
                                     </Button>
                                     
                                     <Label Text="{Binding .}" HorizontalOptions="StartAndExpand" FontSize="16"></Label>
-                                
-                                    <Label FontFamily="FaSolid" Text="{x:Static models:FaSolidIcons.AngleLeft}" 
+
+                                <Label FontFamily="FaSolid" Text="{x:Static models:FaSolidIcons.Trash}" 
                                            HorizontalOptions="EndAndExpand" FontSize="22"></Label>
-                                </StackLayout>
+                            </StackLayout>
                             </Frame>
-                        </SwipeView>
+                    
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>

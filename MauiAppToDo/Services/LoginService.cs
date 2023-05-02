@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 namespace MauiAppToDo.Services
 {
     public class LoginService {
+        private const string ApiUrl = "https://localhost:7072/api/";
+        //https://localhost:7072/api/Users/UserLogin?UserName=Busra&UserPassword=123456
 
         private readonly HttpClient _httpClient;
 
@@ -19,10 +21,8 @@ namespace MauiAppToDo.Services
         }
 
         public async Task<Users> Login(string username, string password)
-        {
-            
-           
-            var response = await _httpClient.GetAsync($"https://localhost:44356/api/Users/UserLogin?UserName={username}&UserPassword={password}");//
+        { 
+            var response = await _httpClient.GetAsync($"{ApiUrl}Users/UserLogin?UserName={username}&UserPassword={password}");
 
             if (response.IsSuccessStatusCode)
             {

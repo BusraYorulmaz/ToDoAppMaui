@@ -21,6 +21,7 @@ public static class MauiProgram
             });
 		builder.Services.AddSingleton<ToDoPage>();
         builder.Services.AddSingleton<MainViewModel>();
+		builder.Services.AddSingleton<ToDoListService>();
 	
 
         return builder.Build();

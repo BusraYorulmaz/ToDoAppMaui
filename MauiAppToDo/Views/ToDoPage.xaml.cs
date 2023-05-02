@@ -7,10 +7,12 @@ namespace MauiAppToDo;
 
 public partial class ToDoPage : ContentPage
 {
-    public ToDoPage(MainViewModel mvm)
+    public ToDoPage(MainViewModel viewModel)
 	{
 		InitializeComponent();
-        BindingContext= mvm;
+        BindingContext= viewModel;
+
+        viewModel.InitializeAsync();
 
         //preferences de kaydolan veriler çaðýrýlýr 
         string  userName = Preferences.Get("UserName",string.Empty);

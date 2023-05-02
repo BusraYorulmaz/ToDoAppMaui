@@ -14,8 +14,6 @@ public partial class MainPage : ContentPage
     public MainPage()
 	{
 		InitializeComponent(); 
-		//string name = Preferences.Get("UserName", "");//preferences den adı yükle
-        // EnterUserName.Text = name;
     }
 
     private async void  BtnMoveToToDoPage_Clicked(object sender, EventArgs e)
@@ -30,7 +28,7 @@ public partial class MainPage : ContentPage
             {         
                 
                 //Bilgiler preferencese kaydedilir 
-                Preferences.Set("UserId",users.Id.ToString());
+                Preferences.Set("UserId",users.Id);
                 Preferences.Set("UserName", users.UserName);
                 Preferences.Set("UserEmail", users.UserEmail);
                 Preferences.Set("UserPassword", users.UserPassword);

@@ -48,12 +48,12 @@ namespace WebApi.Controllers
             toDoList.IsComplete = 1;
             _ApiDbContext.Entry(toDoList).State = EntityState.Modified;
             await _ApiDbContext.SaveChangesAsync();
-            return Ok("deleted");
+            return Ok(toDoList);
         }
 
 
         //delete
-        [HttpPost("[action]")]
+        [HttpDelete("[action]")]
         public IActionResult DeleteToDoList(int id)
         {
             var toDoList = _ApiDbContext.ToDoLists.FirstOrDefault(x => x.Id == id);

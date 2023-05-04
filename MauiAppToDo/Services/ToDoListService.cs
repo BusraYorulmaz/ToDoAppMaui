@@ -46,15 +46,10 @@ namespace MauiAppToDo.Services
         public async Task<bool> DeleteToDoList(int id)
         {
             var response = await _httpClient.DeleteAsync($"{ApiUrl}/ToDos/DeleteToDoList?id={id}");
-            if (!response.IsSuccessStatusCode) return false;
-            return true;
+            return response.IsSuccessStatusCode;
         }
 
-        //public async Task DeleteToDoList(int id)
-        //{
-        //    var response = await _httpClient.DeleteAsync($"{ApiUrl}/ToDos/DeleteToDoList?id={id}");
-        //    response.EnsureSuccessStatusCode();
-        //}
+        
 
         //// bu kısım hatalı ????
         //////https://192.168.64.1:45457/api/ToDos/CompleteToDoList?id=59

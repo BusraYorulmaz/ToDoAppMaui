@@ -54,29 +54,32 @@
             <CollectionView ItemsSource="{Binding TodoItems}">
                
                 <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="{x:Type x:String}">
+                    <DataTemplate x:DataType="models:ToDoLists">
                       
                             <Frame Margin="0,5,0,0" CornerRadius="4" BorderColor="{StaticResource Primary}">
                                 
                                 <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
 
-                                    <Button Margin="0,5,10,0" WidthRequest="17" HeightRequest="17" CornerRadius="2"  
-                                            BorderWidth="1" BorderColor="Black" BackgroundColor="White"
-                                        x:Name="checkBox"
-                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainViewModel}},Path=ComplatedCommand}"
+                                    <Button Margin="0,5,10,0" WidthRequest="15" 
+                                            HeightRequest="15" CornerRadius="2"  
+                                            BorderWidth="2" BorderColor="Black" BackgroundColor="White"
+                                            x:Name="checkBox"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainViewModel}},Path=ComplatedCommand}"
                                             CommandParameter="{Binding .}">
                                     </Button>
                                     
-                                    <Label Text="{Binding .}" HorizontalOptions="StartAndExpand" FontSize="16"></Label>
+                                    <Label Text="{Binding Title}" HorizontalOptions="StartAndExpand" FontSize="16"></Label>
 
-                                <Label FontFamily="FaSolid" Text="{x:Static models:FaSolidIcons.Trash}" 
-                                           HorizontalOptions="EndAndExpand" FontSize="22"></Label>
+                                <Button  Padding="2" Text="Sil" BackgroundColor="Red" HorizontalOptions="EndAndExpand" 
+                                         FontSize="14"
+                                         Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainViewModel}},Path=DeleteCommand}"
+                                         CommandParameter="{Binding .}" />
                             </StackLayout>
                             </Frame>
                     
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
-            </CollectionView>
+            </CollectionView> 
 
 
             <!--complated list-->
@@ -85,14 +88,14 @@
             <CollectionView ItemsSource="{Binding ComplatedList}">
                
                 <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="{x:Type x:String}">
+                    <DataTemplate x:DataType="models:ToDoLists">
 
                         <Frame CornerRadius="4" Margin="4" 
                                BackgroundColor="DimGray" 
                                BorderColor="{StaticResource Primary}">
                             <HorizontalStackLayout>
                                 <CheckBox x:Name="checkBox" IsChecked="True"></CheckBox>
-                                <Label Text="{Binding .}"
+                                <Label Text="{Binding Title}"
                                        FontSize="Medium">
                                     <Label.Triggers>
                                         <DataTrigger Binding="{Binding Source={x:Reference checkBox},Path=IsChecked}"

@@ -17,6 +17,7 @@ namespace WebApi.Controllers
             _ApiDbContext = apiDbContext;
         }
 
+        //Add
         [HttpPost("[action]")]
         public async Task<IActionResult> AddToDoList(int userId , [FromBody] ToDoLists toDoLists)
         {
@@ -27,28 +28,60 @@ namespace WebApi.Controllers
             return Ok(toDoLists);
         }
 
+        //list by userId
         [HttpGet("[action]")]
         public async Task<IActionResult> GetToDoLists(int userId)
         {
             var toDoLists = await _ApiDbContext.ToDoLists.Where(x => x.UserId == userId).ToListAsync();
-
             return Ok(toDoLists);
         }
 
-
+        //update
         [HttpPost("[action]")]
-        public async Task<IActionResult> DeleteToDoList(int id)
+        public async Task<IActionResult> CompleteToDoList(int id)
         {
             var toDoList = await _ApiDbContext.ToDoLists.FindAsync(id);
             if (toDoList == null)
             {
                 return NotFound();
             }
+            toDoList.IsComplete = 1;
+            _ApiDbContext.Entry(toDoList).State = EntityState.Modified;
+            await _ApiDbContext.SaveChangesAsync();
+            return Ok("deleted");
+        }
+
+
+        //delete
+        [HttpPost("[action]")]
+        public IActionResult DeleteToDoList(int id)
+        {
+            var toDoList = _ApiDbContext.ToDoLists.FirstOrDefault(x => x.Id == id);
+            if (toDoList == null)
+            {
+                return NotFound();
+            }
 
             _ApiDbContext.ToDoLists.Remove(toDoList);
-            await _ApiDbContext.SaveChangesAsync();
-
-            return NoContent();
+            _ApiDbContext.SaveChangesAsync();
+            
+           return Ok(toDoList);
         }
+
+        ////delete
+        //[HttpPost("[action]")]
+        //public async Task<IActionResult> DeleteToDoList(int id)
+        //{
+        //    var toDoList =  _ApiDbContext.ToDoLists.FirstOrDefault(x=>x.Id ==id);
+        //    if (toDoList == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    _ApiDbContext.ToDoLists.Remove(toDoList);
+        //    await _ApiDbContext.SaveChangesAsync();
+
+        //    return Ok(toDoList);
+        //}
     }
 }

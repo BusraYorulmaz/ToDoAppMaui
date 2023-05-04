@@ -5,6 +5,7 @@ using MauiAppToDo.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,17 +22,19 @@ public partial class MainViewModel : ObservableObject
      
 
     [ObservableProperty]
-    ObservableCollection<String> todoItems;
+    ObservableCollection<ToDoLists> todoItems; 
 
     [ObservableProperty]
-    ObservableCollection<String> complatedList;
+    ObservableCollection<ToDoLists> complatedList;
 
-    
+     
+
+
     public MainViewModel()
     {
         _toDoListService= new ToDoListService();
-        TodoItems = new ObservableCollection<String>();
-        ComplatedList = new ObservableCollection<String>();
+        TodoItems = new ObservableCollection<ToDoLists>();
+        ComplatedList = new ObservableCollection<ToDoLists>();
     }
 
     private List<ToDoLists> _toDoLists;
@@ -53,7 +56,7 @@ public partial class MainViewModel : ObservableObject
         {
             foreach(var item in toDoLists)
             {
-                TodoItems.Add(item.Title);
+                TodoItems.Add(item);
             }
         }
     }
@@ -77,31 +80,57 @@ public partial class MainViewModel : ObservableObject
 
         if (createdToDoList != null)
         {
-             TodoItems.Add(createdToDoList.Title);
+             TodoItems.Add(createdToDoList);
              To_do = string.Empty;          
         }     
     }
 
 
     [RelayCommand]
-    void Delete(string del)
-    {
-        if (TodoItems.Contains(del))
+    async Task Delete(object item)
+    { 
+        Debug.WriteLine(item.GetType().ToString());
+        if (item is ToDoLists toDoLists)
         {
-            TodoItems.Remove(del);
+            var succes = await _toDoListService.DeleteToDoList(toDoLists.Id);
+            if (succes)
+            {
+                TodoItems.Remove(toDoLists);
+            }
+
         }
     }
 
-    [RelayCommand]
-    void Complated(string completedTodo)
-    {
+   
 
+    //[RelayCommand]
+    //void Delete(string del)
+    //{
+    //    if (TodoItems.Contains(del))
+    //    {
+    //        TodoItems.Remove(del);
+
+    //    }
+    //}
+
+    [RelayCommand]
+    void Complated(ToDoLists completedTodo)
+    {
         ComplatedList.Add(completedTodo);
         TodoItems.Remove(completedTodo);
-
     }
 
+    //[RelayCommand]
+    //async void Complated(ToDoLists toDoLists)
+    //{
+    //    var toDoList = await _toDoListService.CompleteToDoList(toDoLists.Id);
+    //    if (toDoList != null)
+    //    {
 
+    //        ComplatedList.Add(toDoLists.Title);
+    //        TodoItems.Remove(toDoLists.Title);
+    //    }
+    //}
 
 
 }

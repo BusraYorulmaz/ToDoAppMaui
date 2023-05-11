@@ -34,9 +34,20 @@ namespace WebApi.Controllers
             return Ok(users);
         }
 
+        ///  
+        [HttpPost("[action]")]
+        public IActionResult Register([FromBody] Users user)
+        {
+            var userExists = _ApiDbContext.Users.FirstOrDefault(u => u.UserEmail == user.UserEmail);
+            if (userExists != null)
+            {
+                return BadRequest("User with same email already exists");
+            }
+            _ApiDbContext.Users.Add(user);
+            _ApiDbContext.SaveChanges();
+            return StatusCode(StatusCodes.Status201Created);
+        }
 
-
-        // Login 
         [HttpGet("[action]")]
         public  IActionResult UserLogin([FromQuery] string UserName, string UserPassword)
         {

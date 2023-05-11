@@ -12,21 +12,27 @@ namespace MauiAppToDo.Services
 {
     public class ToDoListService
     {
-         private const string ApiUrl = "https://localhost:7072/api";
-      //  private const string ApiUrl = "https://192.168.64.1:45457/api";
-        
-            private readonly HttpClient _httpClient;
+
+        private const string ApiUrl = "https://localhost:7072/api";
+        // private const string ApiUrl = "https://192.168.64.1:45455/api";
+        // private const string ApiUrl = "https://littlegoldleaf69.conveyor.cloud/api";
+        // private const string ApiUrl = "http://busrayorulmaz-001-site1.btempurl.com/api";
+
+
+        private readonly HttpClient _httpClient;
 
         public ToDoListService()
         {
             _httpClient = new HttpClient();
         }
 
-        public async Task<ToDoLists> ToDoLists(int userId,ToDoLists toDoLists)
-        {          
-            var response = await _httpClient.PostAsJsonAsync($"{ApiUrl}/ToDos/AddToDoList?userId={userId}",toDoLists);
+
+        //ekleme
+        public async Task<ToDoLists> ToDoLists(int userId, ToDoLists toDoLists)
+        {
+            var response = await _httpClient.PostAsJsonAsync($"{ApiUrl}/ToDos/AddToDoList?userId={userId}", toDoLists);
             response.EnsureSuccessStatusCode();
-            var createdToDoList = await response.Content.ReadFromJsonAsync<ToDoLists>(); 
+            var createdToDoList = await response.Content.ReadFromJsonAsync<ToDoLists>();
             return createdToDoList;
         }
 
@@ -42,30 +48,31 @@ namespace MauiAppToDo.Services
             return null;
         }
 
-        //https://localhost:7072/api/ToDos/DeleteToDoList?id=60
-        public async Task<bool> DeleteToDoList(int id)
+
+        ////delete
+        //public async Task<bool> DeleteToDoList(int id)
+        //{
+        //    var response = await _httpClient.DeleteAsync($"{ApiUrl}/ToDos/DeleteToDoList?id={id}");
+        //    return response.IsSuccessStatusCode;
+        //}
+
+
+        //isActive
+        public async Task<ToDoLists> SetInactive(ToDoLists toDoLists)
         {
-            var response = await _httpClient.DeleteAsync($"{ApiUrl}/ToDos/DeleteToDoList?id={id}");
-            return response.IsSuccessStatusCode;
+            var response = await _httpClient.PostAsJsonAsync($"{ApiUrl}/ToDos/PutInActive?Id={toDoLists.Id}", toDoLists);
+            response.EnsureSuccessStatusCode();
+            return await response.Content.ReadFromJsonAsync<ToDoLists>();
         }
 
-        
+        //complated
+        public async Task<ToDoLists> ToDoComplated(ToDoLists toDoLists)
+        {
+            var response = await _httpClient.PostAsJsonAsync($"{ApiUrl}/ToDos/CompleteToDoList?id={toDoLists.Id}", toDoLists);
+            response.EnsureSuccessStatusCode();
 
-        //// bu kısım hatalı ????
-        //////https://192.168.64.1:45457/api/ToDos/CompleteToDoList?id=59
-        ////update 
-        //public async Task<ToDoLists> CompleteToDoList(int id)
-        //{
-        //    var response = await _httpClient.PostAsync($"{ApiUrl}/ToDos/CompleteToDoList?id={id}", null);
-        //    if (response.IsSuccessStatusCode)
-        //    {
-        //        var content = await response.Content.ReadAsStringAsync();
-        //        var updateToDoList = JsonConvert.DeserializeObject<ToDoLists>(content);
-        //        return updateToDoList;
-        //    }
-        //    return null;
-
-        //}
+            return await response.Content.ReadFromJsonAsync<ToDoLists>();
+        }
 
     }
 }

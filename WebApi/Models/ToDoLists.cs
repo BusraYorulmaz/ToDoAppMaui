@@ -6,6 +6,7 @@
         public int UserId { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public int IsComplete { get; set; } //1,0
+        public bool IsComplete { get; set; }
+        public bool IsActive { get; set; }
     }
 }

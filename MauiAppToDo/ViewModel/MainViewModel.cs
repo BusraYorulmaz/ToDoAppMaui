@@ -18,34 +18,22 @@ public partial class MainViewModel : ObservableObject
     private readonly ToDoListService _toDoListService;
 
     [ObservableProperty]
-    string to_do;  
-     
+    string to_do;
 
     [ObservableProperty]
-    ObservableCollection<ToDoLists> todoItems; 
+    ObservableCollection<ToDoLists> todoItems;
 
     [ObservableProperty]
     ObservableCollection<ToDoLists> complatedList;
 
-     
-
-
     public MainViewModel()
     {
-        _toDoListService= new ToDoListService();
+        _toDoListService = new ToDoListService();
         TodoItems = new ObservableCollection<ToDoLists>();
         ComplatedList = new ObservableCollection<ToDoLists>();
     }
 
-    private List<ToDoLists> _toDoLists;
 
-    public List<ToDoLists> ToDoLists
-    {
-        get => _toDoLists;
-        set => SetProperty(ref _toDoLists, value);
-    }
-
-     
     public async Task InitializeAsync()
     {
         int userId = Preferences.Get("UserId", -1);
@@ -54,7 +42,7 @@ public partial class MainViewModel : ObservableObject
         var toDoLists = await _toDoListService.GetToDoLists(userId);
         if (toDoLists != null)
         {
-            foreach(var item in toDoLists)
+            foreach (var item in toDoLists)
             {
                 TodoItems.Add(item);
             }
@@ -70,67 +58,55 @@ public partial class MainViewModel : ObservableObject
         int id = Preferences.Get("UserId", -1);
         var newToDoList = new ToDoLists
         {
-            Title = To_do,          
-            UserId =id,
-            Description = "null",
-            IsComplete=0,       
+            Title = To_do,
+            UserId = id,
+            Description = "Description is null",
+            IsComplete = false,
+            IsActive = true,
         };
 
         var createdToDoList = await _toDoListService.ToDoLists(newToDoList.UserId, newToDoList);
 
         if (createdToDoList != null)
         {
-             TodoItems.Add(createdToDoList);
-             To_do = string.Empty;          
-        }     
+            TodoItems.Add(createdToDoList);
+            To_do = string.Empty;
+        }
     }
 
 
     [RelayCommand]
     async Task Delete(object item)
-    { 
-        Debug.WriteLine(item.GetType().ToString());
+    {
         if (item is ToDoLists toDoLists)
         {
-            var succes = await _toDoListService.DeleteToDoList(toDoLists.Id);
-            if (succes)
+            var succes = _toDoListService.SetInactive(toDoLists);
+            if (succes != null)
             {
                 TodoItems.Remove(toDoLists);
             }
-
+            TodoItems.Remove(toDoLists);
         }
     }
 
-   
 
-    //[RelayCommand]
-    //void Delete(string del)
-    //{
-    //    if (TodoItems.Contains(del))
-    //    {
-    //        TodoItems.Remove(del);
 
-    //    }
-    //}
 
     [RelayCommand]
-    void Complated(ToDoLists completedTodo)
+    async Task Complated(ToDoLists completedTodo)
     {
-        ComplatedList.Add(completedTodo);
-        TodoItems.Remove(completedTodo);
+        if (completedTodo is ToDoLists toDoLists)
+        {
+            var updatedToDo = await _toDoListService.ToDoComplated(toDoLists);
+            if (updatedToDo != null)
+            {
+                ComplatedList.Add(completedTodo);
+                TodoItems.Remove(completedTodo);
+            }
+        }
     }
 
-    //[RelayCommand]
-    //async void Complated(ToDoLists toDoLists)
-    //{
-    //    var toDoList = await _toDoListService.CompleteToDoList(toDoLists.Id);
-    //    if (toDoList != null)
-    //    {
 
-    //        ComplatedList.Add(toDoLists.Title);
-    //        TodoItems.Remove(toDoLists.Title);
-    //    }
-    //}
 
 
 }

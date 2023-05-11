@@ -6,10 +6,10 @@
              NavigationPage.HasNavigationBar="False">
     <Grid>
         <StackLayout Margin="20,0,20,0">
-            
+
             <!--logo-->
             <Image Source="todoapplogo.png" HeightRequest="250"/>
-            
+
             <!--Text-->
             <StackLayout Margin="0,0,0,20">
                 <!-- <Label Style="{StaticResource Welcome}"  Text="To-Do App"/> -->
@@ -37,7 +37,7 @@
                     Margin="0,30,0,5" CornerRadius="4" BackgroundColor="{StaticResource Secondary}" 
                         Text="Sign In" TextColor="{StaticResource Primary}" FontFamily="OpenSansSemibold" />
 
-                
+
 
             </StackLayout>
 

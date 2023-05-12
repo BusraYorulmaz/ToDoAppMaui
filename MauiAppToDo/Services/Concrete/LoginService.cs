@@ -1,4 +1,5 @@
 ﻿using MauiAppToDo.Models;
+using MauiAppToDo.Services.Abstract;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -7,17 +8,23 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace MauiAppToDo.Services
+namespace MauiAppToDo.Services.Concrete
 {
-    public class LoginService
+    public class LoginService : ILoginService
     {
-        private const string ApiUrl = "https://localhost:7072/api";
+        private const string ApiUrl = "https://192.168.64.1:45464/api";
 
         private readonly HttpClient _httpClient;
 
         public LoginService()
         {
-            _httpClient = new HttpClient();
+            var handler = new HttpClientHandler
+            {
+                ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => true
+            };
+
+            _httpClient = new HttpClient(handler);
+
         }
 
         public async Task<Users> Login(string username, string password)

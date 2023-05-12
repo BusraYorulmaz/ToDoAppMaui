@@ -1,4 +1,5 @@
 ﻿using MauiAppToDo.Models;
+using MauiAppToDo.Services.Abstract;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -8,16 +9,21 @@ using System.Text;
 using System.Threading.Tasks;
 using static System.Net.WebRequestMethods;
 
-namespace MauiAppToDo.Services
+namespace MauiAppToDo.Services.Concrete
 {
-    public class ToDoListService
+    public class ToDoListService : IToDoListService
     {
-        private const string ApiUrl = "https://localhost:7072/api";
+        private const string ApiUrl = "https://192.168.64.1:45464/api";
 
         private readonly HttpClient _httpClient;
         public ToDoListService()
         {
-            _httpClient = new HttpClient();
+            var handler = new HttpClientHandler
+            {
+                ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => true
+            };
+
+            _httpClient = new HttpClient(handler);
         }
 
         //ekleme
@@ -40,13 +46,6 @@ namespace MauiAppToDo.Services
             }
             return null;
         }
-
-        ////delete
-        //public async Task<bool> DeleteToDoList(int id)
-        //{
-        //    var response = await _httpClient.DeleteAsync($"{ApiUrl}/ToDos/DeleteToDoList?id={id}");
-        //    return response.IsSuccessStatusCode;
-        //}
 
         //isActive
         public async Task<ToDoLists> SetInactive(ToDoLists toDoLists)

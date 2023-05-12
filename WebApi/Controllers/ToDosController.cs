@@ -21,7 +21,6 @@ namespace WebApi.Controllers
         [HttpPost("[action]")]
         public async Task<IActionResult> AddToDoList([FromBody] ToDoLists toDoLists)
         {
-            // toDoLists.UserId = userId;
             _ApiDbContext.ToDoLists.Add(toDoLists);
             await _ApiDbContext.SaveChangesAsync();
             return Ok(toDoLists);
@@ -44,17 +43,6 @@ namespace WebApi.Controllers
                 .ToListAsync();
             return Ok(toDoLists);
         }
-
-        ////delete
-        //[HttpDelete("[action]")]
-        //public IActionResult DeleteToDoList(int id)
-        //{
-        //    var toDoList = _ApiDbContext.ToDoLists.FirstOrDefault(x => x.Id == id);
-        //    if (toDoList == null)  return NotFound();
-        //    _ApiDbContext.ToDoLists.Remove(toDoList);
-        //    _ApiDbContext.SaveChangesAsync();
-        //    return Ok(toDoList);
-        //}
 
         //isActive 
         [HttpPost("[action]")]

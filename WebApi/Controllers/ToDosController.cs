@@ -19,12 +19,11 @@ namespace WebApi.Controllers
 
         //Add
         [HttpPost("[action]")]
-        public async Task<IActionResult> AddToDoList(int userId, [FromBody] ToDoLists toDoLists)
+        public async Task<IActionResult> AddToDoList([FromBody] ToDoLists toDoLists)
         {
-            toDoLists.UserId = userId;
+            // toDoLists.UserId = userId;
             _ApiDbContext.ToDoLists.Add(toDoLists);
             await _ApiDbContext.SaveChangesAsync();
-
             return Ok(toDoLists);
         }
 
@@ -32,43 +31,30 @@ namespace WebApi.Controllers
         [HttpGet("[action]")]
         public async Task<IActionResult> GetToDoLists(int userId)
         {
-            var toDoLists = await _ApiDbContext.ToDoLists.Where(x => x.UserId == userId).ToListAsync();
+            var toDoLists = await _ApiDbContext.ToDoLists.Where(x => x.UserId == userId && x.IsActive == true).ToListAsync();
             return Ok(toDoLists);
         }
 
-        //update
-        //[HttpPost("[action]")]
-        //public async Task<IActionResult> CompleteToDoList(int id)
-        //{
-        //    var toDoList = await _ApiDbContext.ToDoLists.FindAsync(id);
-        //    if (toDoList == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    toDoList.IsComplete = 1;
-        //    _ApiDbContext.Entry(toDoList).State = EntityState.Modified;
-        //    await _ApiDbContext.SaveChangesAsync();
-        //    return Ok(toDoList);
-        //}
-
-
-
-        //delete
-        [HttpDelete("[action]")]
-        public IActionResult DeleteToDoList(int id)
+        //list by userId
+        [HttpGet("[action]")]
+        public async Task<IActionResult> IsComplateList(int userId, bool isComplate)
         {
-            var toDoList = _ApiDbContext.ToDoLists.FirstOrDefault(x => x.Id == id);
-            if (toDoList == null)
-            {
-                return NotFound();
-            }
-            _ApiDbContext.ToDoLists.Remove(toDoList);
-            _ApiDbContext.SaveChangesAsync();
-
-            return Ok(toDoList);
+            var toDoLists = await _ApiDbContext.ToDoLists
+                .Where(x => x.UserId == userId && x.IsComplete == isComplate && x.IsActive == true)
+                .ToListAsync();
+            return Ok(toDoLists);
         }
 
-
+        ////delete
+        //[HttpDelete("[action]")]
+        //public IActionResult DeleteToDoList(int id)
+        //{
+        //    var toDoList = _ApiDbContext.ToDoLists.FirstOrDefault(x => x.Id == id);
+        //    if (toDoList == null)  return NotFound();
+        //    _ApiDbContext.ToDoLists.Remove(toDoList);
+        //    _ApiDbContext.SaveChangesAsync();
+        //    return Ok(toDoList);
+        //}
 
         //isActive 
         [HttpPost("[action]")]
@@ -76,10 +62,8 @@ namespace WebApi.Controllers
         {
             var toDoLists = await _ApiDbContext.ToDoLists.FindAsync(Id);
             if (toDoLists is null) return NotFound();
-
             toDoLists.IsActive = false;
             _ApiDbContext.Entry(toDoLists).State = EntityState.Modified;
-
             await _ApiDbContext.SaveChangesAsync();
             return Ok(toDoLists);
         }
@@ -90,7 +74,6 @@ namespace WebApi.Controllers
         {
             var toDoList = await _ApiDbContext.ToDoLists.FindAsync(id);
             if (toDoList == null) return NotFound();
-
             toDoList.IsComplete = true;
             _ApiDbContext.Entry(toDoList).State = EntityState.Modified;
             await _ApiDbContext.SaveChangesAsync();

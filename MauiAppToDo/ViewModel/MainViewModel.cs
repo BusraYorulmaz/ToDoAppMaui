@@ -44,7 +44,14 @@ public partial class MainViewModel : ObservableObject
         {
             foreach (var item in toDoLists)
             {
-                TodoItems.Add(item);
+                if (item.IsComplete == false)
+                {
+                    TodoItems.Add(item);
+                }
+                else
+                {
+                    ComplatedList.Add(item);
+                }
             }
         }
     }
@@ -65,7 +72,7 @@ public partial class MainViewModel : ObservableObject
             IsActive = true,
         };
 
-        var createdToDoList = await _toDoListService.ToDoLists(newToDoList.UserId, newToDoList);
+        var createdToDoList = await _toDoListService.ToDoLists(newToDoList);
 
         if (createdToDoList != null)
         {
@@ -80,12 +87,11 @@ public partial class MainViewModel : ObservableObject
     {
         if (item is ToDoLists toDoLists)
         {
-            var succes = _toDoListService.SetInactive(toDoLists);
+            var succes = await _toDoListService.SetInactive(toDoLists);
             if (succes != null)
             {
                 TodoItems.Remove(toDoLists);
             }
-            TodoItems.Remove(toDoLists);
         }
     }
 

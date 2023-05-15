@@ -19,6 +19,15 @@ namespace MauiAppToDo.ViewModel
         [ObservableProperty]
         string userPassword;
 
+
+        private bool rememberMe;
+        public bool RememberMe
+        {
+            get { return rememberMe; }
+            set { SetProperty(ref rememberMe, value); }
+        }
+
+
         [RelayCommand]
         private async Task Login()
         {
@@ -32,6 +41,13 @@ namespace MauiAppToDo.ViewModel
                     Preferences.Set("UserEmail", users.UserEmail);
                     Preferences.Set("UserPassword", users.UserPassword);
                     await Application.Current.MainPage.Navigation.PushAsync(new ToDoPage(new MainViewModel()));
+
+                    if (!RememberMe)
+                    {
+                        UserName = string.Empty;
+                        UserPassword = string.Empty;
+                    }
+                
                 }
                 else
                 {
@@ -43,11 +59,6 @@ namespace MauiAppToDo.ViewModel
                 await Application.Current.MainPage.DisplayAlert("Warning", "Please Input Username and password", "Ok");
             }
         }
-
-
-
-
-
 
     }
 }

@@ -21,7 +21,7 @@
                 Placeholder="Enter Your ToDo"
                 Margin="20" 
                 FontSize="20" 
-                Text="{Binding To_do}"
+                Text="{Binding Todo}"
                 x:Name="ToDoNameEntry"/>
 
         <Button Margin="30,10" 

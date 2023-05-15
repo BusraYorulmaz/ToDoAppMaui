@@ -4,39 +4,50 @@
              x:Class="MauiAppToDo.ToDoPage"
              xmlns:viewmodel="clr-namespace:MauiAppToDo.ViewModel"
              xmlns:models="clr-namespace:MauiAppToDo.Models"
-             x:DataType="viewmodel:MainViewModel"
-             Title="To Do Page"
-             BackgroundColor="{StaticResource Blue200Accent}">
+              x:DataType="viewmodel:MainViewModel" 
+             BackgroundColor="{StaticResource Blue200Accent}"
+              NavigationPage.HasNavigationBar="False">
 
 
-    <ContentPage.ToolbarItems>
+    <!--<ContentPage.ToolbarItems>
         <ToolbarItem x:Name="BtnPopup" 
                      Text="Add " 
                      Clicked="BtnClickedPopup"/>
-    </ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="Btn" 
+                     Text="Out" 
+                     Command="{Binding LogoutCommand}"/>
+    </ContentPage.ToolbarItems>-->
 
     <ScrollView>
-        <VerticalStackLayout Margin="20">
+        <VerticalStackLayout Margin="0">
 
-            <Grid ColumnDefinitions="*,*,*">
-                <Label Grid.Column="0" 
+            <Grid ColumnDefinitions="100,100,*,55"   Padding="15">
+                <Label Grid.Column="0"
                        Text="Welcome!" 
-                       FontSize="23" 
+                       FontSize="20" 
                        TextColor="Black"
-                       FontAttributes="Bold"/>
-                <Label Grid.Column="1"    
+                       FontAttributes="Bold"                     
+                       VerticalOptions="Center"/>
+                
+                <Label Grid.Column="1"           
                        x:Name="LblUserName" 
-                       FontSize="23" 
+                       FontSize="20" 
                        TextColor="Black"
-                       FontAttributes="Bold"/>
-                <!--<Label Grid.Column="2"    
-                       x:Name="LblUserEmail" 
-                       FontSize="23"   
-                       FontAttributes="Bold"></Label>-->
+                       FontAttributes="Bold" 
+                       VerticalOptions="Center"/>
+                
+                <Button Grid.Column="2" Text="Add"         
+                        HorizontalOptions="EndAndExpand"
+                        Clicked="BtnClickedPopup"/>
+                
+                <Button Grid.Column="3" Text="Out"
+                        HorizontalOptions="EndAndExpand"
+                        Command="{Binding LogoutCommand}"/>
             </Grid>
 
             <!--Add to do-->
-            <Frame Padding="10" Margin="0,10">
+            <!--
+            <Frame Padding="10" Margin="10,10">
                 <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
                     <Entry HorizontalOptions="StartAndExpand"
                            Placeholder="Add To Do" 
@@ -44,7 +55,7 @@
                            PlaceholderColor="{StaticResource Primary}" 
                            FontAttributes="Bold" 
                            FontSize="14" 
-                           Text="{Binding To_do}" 
+                           Text="{Binding Todo}" 
                            Margin="0,0,0,0"
                            x:Name="ToDoNameEntry"/>
 
@@ -57,7 +68,7 @@
                             Margin="5,5"
                             CornerRadius="4"/>
                 </StackLayout>
-            </Frame>
+            </Frame>-->
 
             <!--ToDo List-->
             <StackLayout VerticalOptions="CenterAndExpand">
@@ -68,7 +79,7 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:ToDoLists">
 
-                        <Frame Margin="0,5,0,5" CornerRadius="4" BorderColor="{StaticResource Primary}">
+                        <Frame Margin="10,5" CornerRadius="4" BorderColor="{StaticResource Primary}">
 
                             <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
 
@@ -104,12 +115,12 @@
                 <Label Margin="0,15,0,5" Text="Completed" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center"/>
             </StackLayout>
 
-            <CollectionView ItemsSource="{Binding ComplatedList}">
+            <CollectionView ItemsSource="{Binding Complateda}">
 
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:ToDoLists">
 
-                        <Frame CornerRadius="4" Margin="4" 
+                        <Frame CornerRadius="4" Margin="10,5" 
                                BackgroundColor="LightSlateGray" 
                                BorderColor="{StaticResource Primary}">
                             <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">

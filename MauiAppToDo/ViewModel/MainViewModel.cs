@@ -16,21 +16,22 @@ namespace MauiAppToDo.ViewModel;
 public partial class MainViewModel : ObservableObject
 {
     private readonly ToDoListService _toDoListService;
-
-    [ObservableProperty]
-    string to_do;
+     
 
     [ObservableProperty]
     ObservableCollection<ToDoLists> todoItems;
 
     [ObservableProperty]
-    ObservableCollection<ToDoLists> complatedList;
+    string todo;
+   
 
+    [ObservableProperty]
+    ObservableCollection<ToDoLists> complateda;
     public MainViewModel()
     {
         _toDoListService = new ToDoListService();
-        TodoItems = new ObservableCollection<ToDoLists>();
-        ComplatedList = new ObservableCollection<ToDoLists>();
+        TodoItems = new ObservableCollection<ToDoLists>(); 
+        Complateda = new ObservableCollection<ToDoLists>();
     }
 
 
@@ -50,7 +51,7 @@ public partial class MainViewModel : ObservableObject
                 }
                 else
                 {
-                    ComplatedList.Add(item);
+                    Complateda.Add(item);
                 }
             }
         }
@@ -60,12 +61,12 @@ public partial class MainViewModel : ObservableObject
     [RelayCommand]
     private async Task AddToDo()
     {
-        if (string.IsNullOrWhiteSpace(To_do))
+        if (string.IsNullOrWhiteSpace(Todo))
             return;
         int id = Preferences.Get("UserId", -1);
         var newToDoList = new ToDoLists
         {
-            Title = To_do,
+            Title = Todo,
             UserId = id,
             Description = "Description is null",
             IsComplete = false,
@@ -77,10 +78,10 @@ public partial class MainViewModel : ObservableObject
         if (createdToDoList != null)
         {
             TodoItems.Add(createdToDoList);
-            To_do = string.Empty;
+            Todo = string.Empty;
         }
     }
-
+    
 
     [RelayCommand]
     async Task Delete(object item)
@@ -91,7 +92,7 @@ public partial class MainViewModel : ObservableObject
             if (succes != null)
             {
                 TodoItems.Remove(toDoLists);
-                ComplatedList.Remove(toDoLists);
+                Complateda.Remove(toDoLists);
             }
         }
     }
@@ -107,13 +108,24 @@ public partial class MainViewModel : ObservableObject
             var updatedToDo = await _toDoListService.ToDoComplated(toDoLists);
             if (updatedToDo != null)
             {
-                ComplatedList.Add(completedTodo);
+                Complateda.Add(completedTodo);
                 TodoItems.Remove(completedTodo);
             }
         }
     }
 
-   
 
+    [RelayCommand]
+    private async Task Logout()
+    {
+        // Oturum bilgilerini temizle
+        Preferences.Remove("UserId");
+        Preferences.Remove("UserName");
+        Preferences.Remove("UserEmail");
+        Preferences.Remove("UserPassword");
+
+        // Oturum kapandığında giriş sayfasına yönlendir
+        await Application.Current.MainPage.Navigation.PopToRootAsync();
+    }
 
 }

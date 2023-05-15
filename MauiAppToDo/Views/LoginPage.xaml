@@ -39,8 +39,11 @@
                 <Button x:Name="BtnMoveToToDoPage" Command="{Binding LoginCommand}"
                     Margin="0,30,0,5" CornerRadius="4" BackgroundColor="{StaticResource Secondary}" 
                         Text="Sign In" TextColor="{StaticResource Primary}" FontFamily="OpenSansSemibold" />
-
-
+                
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="0,10">
+                    <CheckBox Color="{StaticResource Blue100Accent}" IsChecked="{Binding RememberMe}"/>
+                    <Label Text="Remember Me" VerticalOptions="Center" Margin="5,0,0,0" TextColor="Black" />
+                </StackLayout>
 
             </StackLayout>
 

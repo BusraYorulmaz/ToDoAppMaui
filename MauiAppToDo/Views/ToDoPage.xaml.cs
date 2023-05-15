@@ -8,24 +8,25 @@ namespace MauiAppToDo;
 public partial class ToDoPage : ContentPage
 {
     public ToDoPage(MainViewModel viewModel)
-	{
-		InitializeComponent();
-        BindingContext= viewModel;
+    {
+        InitializeComponent();
 
+        BindingContext = viewModel;
         viewModel.InitializeAsync();
 
+        NavigationPage.SetHasBackButton(this, false);
         //preferences de kaydolan veriler çaðýrýlýr 
-        string  userName = Preferences.Get("UserName",string.Empty);
-        string userEmail = Preferences.Get("UserEmail", string.Empty);
-           
-        LblUserName.Text = userName;  
+        string userName = Preferences.Get("UserName", string.Empty);
+        //string userEmail = Preferences.Get("UserEmail", string.Empty);
+
+        LblUserName.Text = userName;
         //LblUserEmail.Text = userEmail;
     }
 
-     private void BtnClickedPopup(object sender, EventArgs e)
+    private void BtnClickedPopup(object sender, EventArgs e)
     {
         this.ShowPopup(new PopupPageAddToDo());
     }
 
-   
+
 }

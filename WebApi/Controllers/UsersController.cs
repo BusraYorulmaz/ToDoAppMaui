@@ -34,32 +34,45 @@ namespace WebApi.Controllers
             return Ok(users);
         }
 
-        ///  
         [HttpPost("[action]")]
         public IActionResult Register([FromBody] Users user)
         {
-            var userExists = _ApiDbContext.Users.FirstOrDefault(u => u.UserEmail == user.UserEmail);
-            if (userExists != null)
+            try
             {
-                return BadRequest("User with same email already exists");
+                var userExists = _ApiDbContext.Users.FirstOrDefault(u => u.UserEmail == user.UserEmail);
+                if (userExists != null)
+                {
+                    return BadRequest("User with same email already exists");
+                }
+                _ApiDbContext.Users.Add(user);
+                _ApiDbContext.SaveChanges();
+                return StatusCode(StatusCodes.Status201Created);
             }
-            _ApiDbContext.Users.Add(user);
-            _ApiDbContext.SaveChanges();
-            return StatusCode(StatusCodes.Status201Created);
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Bir hata oluştu: " + ex.Message);
+            }
         }
 
         [HttpGet("[action]")]
-        public  IActionResult UserLogin([FromQuery] string UserName, string UserPassword)
+        public IActionResult UserLogin([FromQuery] string UserName, string UserPassword)
         {
-            var result = _ApiDbContext.Users.FirstOrDefault(x=>x.UserName== UserName && x.UserPassword==UserPassword);
-            if (result == null)
+            try
             {
-                return NotFound();
+                var result = _ApiDbContext.Users.FirstOrDefault(x => x.UserName == UserName && x.UserPassword == UserPassword);
+                if (result == null)
+                {
+                    return NotFound();
+                }
+                return Ok(new List<Users> { result });
             }
-            return Ok(new List<Users>{ result});
-           
+            catch (Exception ex)
+            {
+                return StatusCode(404, "Bir hata oluştu: " + ex.Message);
+            }
+
         }
-        
+
 
     }
 }

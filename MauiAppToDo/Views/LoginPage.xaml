@@ -2,6 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiAppToDo.LoginPage"
+             xmlns:viewmodel="clr-namespace:MauiAppToDo.ViewModel"
+             x:DataType="viewmodel:LoginPageViewModel"
              BackgroundColor="{StaticResource Primary}"
              NavigationPage.HasNavigationBar="False">
     <Grid>
@@ -22,18 +24,19 @@
                 <Label Style="{StaticResource TextStyle}" Text="User Name"/>
                 <Grid Margin="0,5,0,20">
                     <Frame BackgroundColor="{StaticResource Secondary}" CornerRadius="4"/>
-                    <Entry Placeholder=" Enter username"  x:Name="EnterUserName"  PlaceholderColor="DarkGray"/>
+                    <Entry Placeholder=" Enter username" Text="{Binding UserName}" x:Name="EnterUserName"  PlaceholderColor="DarkGray"/>
+                    <!--x:Name="EnterUserName"-->
                 </Grid>
 
                 <!--password-->
                 <Label Style="{StaticResource TextStyle}" Text="Password"/>
                 <Grid Margin="0,5">
                     <Frame BackgroundColor="{StaticResource Secondary}" CornerRadius="4"/>
-                    <Entry Placeholder="Enter password" PlaceholderColor="DarkGray" IsPassword="True" x:Name="EnterPassword"  />
+                    <Entry Placeholder="Enter password" Text="{Binding UserPassword}" PlaceholderColor="DarkGray" IsPassword="True" x:Name="EnterPassword"  />
                 </Grid>
 
                 <!--button-->
-                <Button x:Name="BtnMoveToToDoPage" Clicked="BtnMoveToToDoPage_Clicked" 
+                <Button x:Name="BtnMoveToToDoPage" Command="{Binding LoginCommand}"
                     Margin="0,30,0,5" CornerRadius="4" BackgroundColor="{StaticResource Secondary}" 
                         Text="Sign In" TextColor="{StaticResource Primary}" FontFamily="OpenSansSemibold" />
 

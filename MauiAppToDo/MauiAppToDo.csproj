@@ -60,6 +60,8 @@
 	 
 	  <None Remove="Resources\Fonts\fa-solid-900.ttf" />
 	 
+	  <None Remove="Resources\Images\del.png" />
+	 
 	  <None Remove="Resources\Images\loginlogo.jpg" />
 	  <None Remove="Resources\Splash\splash.svg" />
 	</ItemGroup>

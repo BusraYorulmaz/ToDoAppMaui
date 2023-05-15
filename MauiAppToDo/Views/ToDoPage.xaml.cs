@@ -19,7 +19,7 @@ public partial class ToDoPage : ContentPage
         string userEmail = Preferences.Get("UserEmail", string.Empty);
            
         LblUserName.Text = userName;  
-        LblUserEmail.Text = userEmail;
+        //LblUserEmail.Text = userEmail;
     }
 
      private void BtnClickedPopup(object sender, EventArgs e)

@@ -91,6 +91,7 @@ public partial class MainViewModel : ObservableObject
             if (succes != null)
             {
                 TodoItems.Remove(toDoLists);
+                ComplatedList.Remove(toDoLists);
             }
         }
     }
@@ -112,7 +113,7 @@ public partial class MainViewModel : ObservableObject
         }
     }
 
-
+   
 
 
 }

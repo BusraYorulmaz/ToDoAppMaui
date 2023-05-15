@@ -21,51 +21,70 @@ namespace WebApi.Controllers
         [HttpPost("[action]")]
         public async Task<IActionResult> AddToDoList([FromBody] ToDoLists toDoLists)
         {
-            _ApiDbContext.ToDoLists.Add(toDoLists);
-            await _ApiDbContext.SaveChangesAsync();
-            return Ok(toDoLists);
+            try
+            {
+                _ApiDbContext.ToDoLists.Add(toDoLists);
+                await _ApiDbContext.SaveChangesAsync();
+                return Ok(toDoLists);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Bir hata oluştu: " + ex.Message);
+            }
         }
 
         //list by userId
         [HttpGet("[action]")]
         public async Task<IActionResult> GetToDoLists(int userId)
         {
-            var toDoLists = await _ApiDbContext.ToDoLists.Where(x => x.UserId == userId && x.IsActive == true).ToListAsync();
-            return Ok(toDoLists);
+            try
+            {
+                var toDoLists = await _ApiDbContext.ToDoLists.Where(x => x.UserId == userId && x.IsActive == true).ToListAsync();
+                return Ok(toDoLists);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(404, "Bir hata oluştu: " + ex.Message);
+            }
         }
-
-        //list by userId
-        [HttpGet("[action]")]
-        public async Task<IActionResult> IsComplateList(int userId, bool isComplate)
-        {
-            var toDoLists = await _ApiDbContext.ToDoLists
-                .Where(x => x.UserId == userId && x.IsComplete == isComplate && x.IsActive == true)
-                .ToListAsync();
-            return Ok(toDoLists);
-        }
+         
 
         //isActive 
         [HttpPost("[action]")]
         public async Task<IActionResult> PutInActive(int Id)
         {
-            var toDoLists = await _ApiDbContext.ToDoLists.FindAsync(Id);
-            if (toDoLists is null) return NotFound();
-            toDoLists.IsActive = false;
-            _ApiDbContext.Entry(toDoLists).State = EntityState.Modified;
-            await _ApiDbContext.SaveChangesAsync();
-            return Ok(toDoLists);
+            try
+            {
+                var toDoLists = await _ApiDbContext.ToDoLists.FindAsync(Id);
+                if (toDoLists is null) return NotFound();
+                toDoLists.IsActive = false;
+                _ApiDbContext.Entry(toDoLists).State = EntityState.Modified;
+                await _ApiDbContext.SaveChangesAsync();
+                return Ok(toDoLists);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Bir hata oluştu: " + ex.Message);
+            }
         }
 
         //Complated
         [HttpPost("[action]")]
         public async Task<IActionResult> CompleteToDoList(int id)
         {
-            var toDoList = await _ApiDbContext.ToDoLists.FindAsync(id);
-            if (toDoList == null) return NotFound();
-            toDoList.IsComplete = true;
-            _ApiDbContext.Entry(toDoList).State = EntityState.Modified;
-            await _ApiDbContext.SaveChangesAsync();
-            return Ok(toDoList);
+            try
+            {
+                var toDoList = await _ApiDbContext.ToDoLists.FindAsync(id);
+                if (toDoList == null) return NotFound();
+                toDoList.IsComplete = true;
+                _ApiDbContext.Entry(toDoList).State = EntityState.Modified;
+                await _ApiDbContext.SaveChangesAsync();
+                return Ok(toDoList);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Bir hata oluştu: " + ex.Message);
+            }
         }
     }
 }

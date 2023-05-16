@@ -23,7 +23,9 @@ public partial class MainViewModel : ObservableObject
 
     [ObservableProperty]
     string todo;
-   
+
+    [ObservableProperty]
+    string description;
 
     [ObservableProperty]
     ObservableCollection<ToDoLists> complateda;
@@ -68,7 +70,7 @@ public partial class MainViewModel : ObservableObject
         {
             Title = Todo,
             UserId = id,
-            Description = "Description is null",
+            Description = Description,
             IsComplete = false,
             IsActive = true,
         };
@@ -79,6 +81,7 @@ public partial class MainViewModel : ObservableObject
         {
             TodoItems.Add(createdToDoList);
             Todo = string.Empty;
+            Description = string.Empty;
         }
     }
     

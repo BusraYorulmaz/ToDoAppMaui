@@ -62,7 +62,21 @@
 	 
 	  <None Remove="Resources\Images\del.png" />
 	 
+	  <None Remove="Resources\Images\den.png" />
+	 
+	  <None Remove="Resources\Images\loginback.png" />
+	 
 	  <None Remove="Resources\Images\loginlogo.jpg" />
+	 
+	  <None Remove="Resources\Images\logo1.png" />
+	 
+	  <None Remove="Resources\Images\logo2.png" />
+	 
+	  <None Remove="Resources\Images\logo3.png" />
+	 
+	  <None Remove="Resources\Images\logo4.png" />
+	 
+	  <None Remove="Resources\Images\update.png" />
 	  <None Remove="Resources\Splash\splash.svg" />
 	</ItemGroup>
 

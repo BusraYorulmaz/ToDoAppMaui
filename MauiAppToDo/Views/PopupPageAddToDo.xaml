@@ -15,19 +15,27 @@
             VerticalOptions="Center" 
             HorizontalOptions="Center"
             FontSize="28"
-            TextColor="Green"
+            TextColor="{StaticResource Primary}"
             FontAttributes="Bold"/>
         <Editor 
                 Placeholder="Enter Your ToDo"
+                PlaceholderColor="Black"
                 Margin="20" 
                 FontSize="20" 
                 Text="{Binding Todo}"
                 x:Name="ToDoNameEntry"/>
+        <Editor 
+                Placeholder="Enter Your Description"
+                PlaceholderColor="Black"
+                Margin="20" 
+                FontSize="20" 
+                Text="{Binding Description}"
+                />
 
         <Button Margin="30,10" 
                 Text="Add" 
                 Command="{Binding AddToDoCommand}" 
                 FontSize="20"
-                BackgroundColor="Green"/>
+                BackgroundColor="{StaticResource Primary}"/>
     </VerticalStackLayout>
 </mct:Popup>

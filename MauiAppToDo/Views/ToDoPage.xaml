@@ -9,15 +9,6 @@
               NavigationPage.HasNavigationBar="False">
 
 
-    <!--<ContentPage.ToolbarItems>
-        <ToolbarItem x:Name="BtnPopup" 
-                     Text="Add " 
-                     Clicked="BtnClickedPopup"/>
-        <ToolbarItem x:Name="Btn" 
-                     Text="Out" 
-                     Command="{Binding LogoutCommand}"/>
-    </ContentPage.ToolbarItems>-->
-
     <ScrollView>
         <VerticalStackLayout Margin="0">
 
@@ -45,30 +36,7 @@
                         Command="{Binding LogoutCommand}"/>
             </Grid>
 
-            <!--Add to do-->
-            <!--
-            <Frame Padding="10" Margin="10,10">
-                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-                    <Entry HorizontalOptions="StartAndExpand"
-                           Placeholder="Add To Do" 
-                           TextColor="{StaticResource Primary}"
-                           PlaceholderColor="{StaticResource Primary}" 
-                           FontAttributes="Bold" 
-                           FontSize="14" 
-                           Text="{Binding Todo}" 
-                           Margin="0,0,0,0"
-                           x:Name="ToDoNameEntry"/>
-
-                    <Button Text="Add" 
-                            HorizontalOptions="EndAndExpand"
-                            FontSize="16" 
-                            BackgroundColor="Green"
-                            Command="{Binding AddToDoCommand}" 
-                            Padding="5" 
-                            Margin="5,5"
-                            CornerRadius="4"/>
-                </StackLayout>
-            </Frame>-->
+         
 
             <!--ToDo List-->
 
@@ -82,27 +50,31 @@
                                     <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
 
                                         <Button Margin="0,0,7,0" WidthRequest="17" 
-                                            HeightRequest="17" CornerRadius="2"  
+                                            HeightRequest="17" CornerRadius="0"  
                                             BorderWidth="2" BorderColor="Black" BackgroundColor="{StaticResource White}"
                                             x:Name="checkBox"
                                             Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainViewModel}},Path=ComplatedCommand}"
                                             CommandParameter="{Binding .}">
                                         </Button>
 
-                                        <StackLayout Orientation="Vertical" Margin="10,0">
+                                        <StackLayout Orientation="Vertical" Margin="7,0">
+                                            <Entry Text="{Binding Title, Mode=TwoWay}" FontAttributes="Bold" TextColor="Black" HorizontalOptions="StartAndExpand" FontSize="16"></Entry>
+                                            <Entry Text="{Binding Description, Mode=TwoWay}" FontAttributes="Italic" TextColor="Black" HorizontalOptions="StartAndExpand" FontSize="14"></Entry>
+                                        </StackLayout>
+                                        <!--<StackLayout Orientation="Vertical" Margin="10,0">
                                             <Label Margin="0" Text="{Binding Title}" FontAttributes="None" TextColor="Black" HorizontalOptions="StartAndExpand" FontSize="14"></Label>
                                             <Label Margin="0" Text="{Binding Description}" FontAttributes="Italic" TextColor="Black" HorizontalOptions="StartAndExpand" FontSize="12"></Label>
-                                        </StackLayout>
+                                        </StackLayout>-->
 
-                                        <ImageButton  HorizontalOptions="EndAndExpand" 
-                                         Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainViewModel}},Path=DeleteCommand}"
+
+                                        <ImageButton  Padding="0"    HorizontalOptions="EndAndExpand" 
+                                         Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainViewModel}},Path=UpdateParamCommand}"
                                          CommandParameter="{Binding .}"
-                                              WidthRequest="35" HeightRequest="35">
+                                              WidthRequest="40" HeightRequest="40">
                                             <ImageButton.Source>
                                                 <FileImageSource File="update.png" />
                                             </ImageButton.Source>
                                         </ImageButton>
-                                        
                                         <ImageButton  Padding="0"    HorizontalOptions="End" 
                                          Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainViewModel}},Path=DeleteCommand}"
                                          CommandParameter="{Binding .}"

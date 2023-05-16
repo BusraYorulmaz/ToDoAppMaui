@@ -119,6 +119,14 @@ public partial class MainViewModel : ObservableObject
 
 
     [RelayCommand]
+    async Task UpdateParam(ToDoLists toDoLists)
+    {
+        if(toDoLists == null)return;
+        await _toDoListService.UpdateToDoList(toDoLists);
+    }
+
+
+    [RelayCommand]
     private async Task Logout()
     {
         // Oturum bilgilerini temizle
@@ -130,5 +138,9 @@ public partial class MainViewModel : ObservableObject
         // Oturum kapandığında giriş sayfasına yönlendir
         await Application.Current.MainPage.Navigation.PopToRootAsync();
     }
+
+
+
+
 
 }

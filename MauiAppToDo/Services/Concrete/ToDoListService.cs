@@ -62,5 +62,19 @@ namespace MauiAppToDo.Services.Concrete
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadFromJsonAsync<ToDoLists>();
         }
+
+        public async Task<ToDoLists> UpdateToDoList(ToDoLists toDoLists)
+        {
+            try
+            {
+                var response = await _httpClient.PutAsJsonAsync($"{ApiUrl}/ToDos/UpdateToDoList?id={toDoLists.Id}", toDoLists);
+                response.EnsureSuccessStatusCode();
+                return await response.Content.ReadFromJsonAsync<ToDoLists>();
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
     }
 }

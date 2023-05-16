@@ -47,7 +47,7 @@ namespace WebApi.Controllers
                 return StatusCode(404, "Bir hata oluştu: " + ex.Message);
             }
         }
-         
+
 
         //isActive 
         [HttpPost("[action]")]
@@ -80,6 +80,28 @@ namespace WebApi.Controllers
                 _ApiDbContext.Entry(toDoList).State = EntityState.Modified;
                 await _ApiDbContext.SaveChangesAsync();
                 return Ok(toDoList);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Bir hata oluştu: " + ex.Message);
+            }
+        }
+
+        //Update
+        [HttpPut("[action]")]
+        public async Task<IActionResult> UpdateToDoList(ToDoLists toDoLists)
+        {
+            try
+            {
+                var updateToDo = await _ApiDbContext.ToDoLists.FindAsync(toDoLists.Id);
+                if (updateToDo == null) return NotFound("ToDo Bulunmadı");
+                
+                updateToDo.Title = toDoLists.Title;
+                updateToDo.Description = toDoLists.Description;
+                _ApiDbContext.Entry(updateToDo).State = EntityState.Modified;
+
+                await _ApiDbContext.SaveChangesAsync();
+                return Ok(updateToDo);
             }
             catch (Exception ex)
             {

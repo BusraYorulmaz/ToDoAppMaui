@@ -13,5 +13,6 @@ namespace MauiAppToDo.Services.Abstract
         Task<List<ToDoLists>> GetToDoLists(int userId);
         Task<ToDoLists> SetInactive(ToDoLists toDoLists);
         Task<ToDoLists> ToDoComplated(ToDoLists toDoLists);
+        Task<ToDoLists> UpdateToDoList(ToDoLists toDoLists);
     }
 }

@@ -20,19 +20,19 @@
         <Editor 
                 Placeholder="Enter Your ToDo"
                 PlaceholderColor="Black"
-                Margin="20" 
+                
                 FontSize="20" 
                 Text="{Binding Todo}"
                 x:Name="ToDoNameEntry"/>
         <Editor 
                 Placeholder="Enter Your Description"
                 PlaceholderColor="Black"
-                Margin="20" 
+               
                 FontSize="20" 
                 Text="{Binding Description}"
                 />
 
-        <Button Margin="30,10" 
+        <Button Margin="10" 
                 Text="Add" 
                 Command="{Binding AddToDoCommand}" 
                 FontSize="20"

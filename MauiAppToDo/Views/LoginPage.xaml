@@ -4,7 +4,7 @@
              x:Class="MauiAppToDo.LoginPage"
              xmlns:viewmodel="clr-namespace:MauiAppToDo.ViewModel"
              x:DataType="viewmodel:LoginPageViewModel"
-             BackgroundImageSource="loginback.png"
+             BackgroundImageSource="back3.png"
              NavigationPage.HasNavigationBar="False">
     <Grid>
         <StackLayout Margin="30,0,30,0">
@@ -13,38 +13,32 @@
             <Image Source="logo4.png" HeightRequest="100" Margin="30,0,30,110"/>
 
             <!--Text-->
-            <StackLayout Margin="0,0,0,10">
+            <StackLayout Margin="0,30,0,10">
 
-                <Label Style="{StaticResource TextStyle}" TextColor="{StaticResource Primary}" HorizontalOptions="Center" 
+                <Label TextColor="{StaticResource oneColor}" HorizontalOptions="Start" 
                        Text="Sign in to continue" FontSize="Title" FontAttributes="Bold"/>
             </StackLayout>
 
             <StackLayout>
 
                 <!--user name-->
-                <Label Style="{StaticResource TextStyle}" Text="User Name"/>
                 <Grid Margin="0,5,0,0">
-
-                    <Entry Placeholder="Enter username" Text="{Binding UserName}" x:Name="EnterUserName"  PlaceholderColor="Gray"/>
+                    <Entry Placeholder="Enter username" Text="{Binding UserName}" x:Name="EnterUserName" FontSize="16"  PlaceholderColor="{StaticResource oneColor}"/>
                 </Grid>
-                <BoxView  HeightRequest="2" Color="{StaticResource Primary}" HorizontalOptions="FillAndExpand" />
+                <BoxView  HeightRequest="2" Color="{StaticResource oneColor}" HorizontalOptions="FillAndExpand" />
                 <!--password-->
-                <Label Style="{StaticResource TextStyle}" Text="Password"/>
                 <Grid Margin="0,5">
-
-                    <Entry Placeholder="Enter password" Text="{Binding UserPassword}" PlaceholderColor="Gray" IsPassword="True" x:Name="EnterPassword"  />
-
+                    <Entry Placeholder="Enter password" Text="{Binding UserPassword}" FontSize="16" PlaceholderColor="{StaticResource oneColor}" IsPassword="True" x:Name="EnterPassword"  />
                 </Grid>
-                <BoxView  HeightRequest="2" Color="{StaticResource Primary}" HorizontalOptions="FillAndExpand" />
-
+                <BoxView  HeightRequest="2" Color="{StaticResource oneColor}" HorizontalOptions="FillAndExpand" />
                 <!--button-->
                 <Button x:Name="BtnMoveToToDoPage" Command="{Binding LoginCommand}"
-                    Margin="50,20,50,0" Padding="10" CornerRadius="60" BackgroundColor="{StaticResource Primary}" 
+                    WidthRequest="140" Margin="0,40,0,0" Padding="10" CornerRadius="15" BackgroundColor="{StaticResource Primary}" 
                         Text="Sign In" TextColor="{StaticResource Secondary}" FontFamily="OpenSansSemibold" />
 
-                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="0,10">
-                    <CheckBox Color="{StaticResource Primary}" IsChecked="{Binding RememberMe}"/>
-                    <Label Text="Remember Me" VerticalOptions="Center" Margin="0,0,0,0" TextColor="{StaticResource Primary}" FontAttributes="Bold"/>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="0,0">
+                    <CheckBox Color="{StaticResource oneColor}" IsChecked="{Binding RememberMe}"/>
+                    <Label Text="Remember Me" VerticalOptions="Center" FontSize="12" TextColor="{StaticResource oneColor}" FontAttributes="Bold"/>
                 </StackLayout>
 
             </StackLayout>

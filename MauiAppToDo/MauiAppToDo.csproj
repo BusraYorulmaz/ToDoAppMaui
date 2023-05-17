@@ -60,9 +60,27 @@
 	 
 	  <None Remove="Resources\Fonts\fa-solid-900.ttf" />
 	 
+	  <None Remove="Resources\Images\back1.png" />
+	 
+	  <None Remove="Resources\Images\back2.png" />
+	 
+	  <None Remove="Resources\Images\back3.png" />
+	 
+	  <None Remove="Resources\Images\carpi.png" />
+	 
+	  <None Remove="Resources\Images\carpi1.png" />
+	 
+	  <None Remove="Resources\Images\carpi3.png" />
+	 
 	  <None Remove="Resources\Images\del.png" />
 	 
 	  <None Remove="Resources\Images\den.png" />
+	 
+	  <None Remove="Resources\Images\kalem.png" />
+	 
+	  <None Remove="Resources\Images\kalem1.png" />
+	 
+	  <None Remove="Resources\Images\kalem2.png" />
 	 
 	  <None Remove="Resources\Images\loginback.png" />
 	 
@@ -75,6 +93,8 @@
 	  <None Remove="Resources\Images\logo3.png" />
 	 
 	  <None Remove="Resources\Images\logo4.png" />
+	 
+	  <None Remove="Resources\Images\okey.png" />
 	 
 	  <None Remove="Resources\Images\update.png" />
 	  <None Remove="Resources\Splash\splash.svg" />

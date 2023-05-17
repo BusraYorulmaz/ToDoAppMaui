@@ -9,33 +9,16 @@
            CanBeDismissedByTappingOutsideOfPopup="True">
 
     <VerticalStackLayout BackgroundColor="White" WidthRequest="250" >
-        <Label 
-            Margin="15"
-            Text="Add To-Do!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center"
-            FontSize="28"
-            TextColor="{StaticResource Primary}"
-            FontAttributes="Bold"/>
-        <Editor 
-                Placeholder="Enter Your ToDo"
-                PlaceholderColor="Black"
-                
-                FontSize="20" 
+        <Label Margin="15" Text="Add To-Do!" VerticalOptions="Center" 
+            HorizontalOptions="Center" FontSize="28"
+            TextColor="{StaticResource oneColor}" FontAttributes="Bold"/>
+        <Editor Margin="20,0" Placeholder="Enter Your ToDo" PlaceholderColor="Black" FontSize="20" 
                 Text="{Binding Todo}"
                 x:Name="ToDoNameEntry"/>
-        <Editor 
-                Placeholder="Enter Your Description"
-                PlaceholderColor="Black"
-               
-                FontSize="20" 
-                Text="{Binding Description}"
-                />
-
-        <Button Margin="10" 
-                Text="Add" 
+        <Editor Margin="20,0" Placeholder="Enter Your Description" PlaceholderColor="Black" FontSize="20" 
+                Text="{Binding Description}"/>
+        <Button Margin="35,10" Text="Add" 
                 Command="{Binding AddToDoCommand}" 
-                FontSize="20"
-                BackgroundColor="{StaticResource Primary}"/>
+                FontSize="20" BackgroundColor="{StaticResource oneColor}"/>
     </VerticalStackLayout>
 </mct:Popup>

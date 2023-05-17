@@ -1,7 +1,9 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Maui.Views;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MauiAppToDo.Models;
 using MauiAppToDo.Services.Concrete;
+using MauiToolkitPopupSample;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -29,11 +31,19 @@ public partial class MainViewModel : ObservableObject
 
     [ObservableProperty]
     ObservableCollection<ToDoLists> complateda;
+
+    [ObservableProperty]
+    bool isPopupVisible;
+
+    [ObservableProperty]
+    bool isRefreshing;
     public MainViewModel()
     {
         _toDoListService = new ToDoListService();
         TodoItems = new ObservableCollection<ToDoLists>(); 
         Complateda = new ObservableCollection<ToDoLists>();
+        IsPopupVisible = false;
+        IsRefreshing = false;
     }
 
 
@@ -58,6 +68,7 @@ public partial class MainViewModel : ObservableObject
             }
         }
     }
+
 
 
     [RelayCommand]
@@ -101,8 +112,6 @@ public partial class MainViewModel : ObservableObject
     }
 
 
-
-
     [RelayCommand]
     async Task Complated(ToDoLists completedTodo)
     {
@@ -117,12 +126,29 @@ public partial class MainViewModel : ObservableObject
         }
     }
 
+    private ToDoLists _selectedToDo;
+
+
+
+    [RelayCommand]
+    async Task UpdateToDo()
+    {
+        _selectedToDo.Title = Todo;
+        _selectedToDo.Description= Description;
+        if (_selectedToDo == null) return;
+        await _toDoListService.UpdateToDoList(_selectedToDo);
+        IsPopupVisible= false;
+    }
+
 
     [RelayCommand]
     async Task UpdateParam(ToDoLists toDoLists)
     {
-        if(toDoLists == null)return;
-        await _toDoListService.UpdateToDoList(toDoLists);
+        Todo = toDoLists.Title;
+        Description = toDoLists.Description;
+        IsPopupVisible = true;
+
+        _selectedToDo = toDoLists;
     }
 
 
@@ -140,7 +166,7 @@ public partial class MainViewModel : ObservableObject
     }
 
 
-
+   
 
 
 }

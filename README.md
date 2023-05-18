@@ -3,7 +3,7 @@ This is a .net maui to do application
 
 - .NET MAUI
 - MVVM
-- ASP.NET CORE
+- ASP.NET CORE WEB API
 - MSSQL
 
 

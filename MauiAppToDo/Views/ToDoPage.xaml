@@ -8,7 +8,6 @@
              BackgroundColor="{StaticResource fiveColor}"
              NavigationPage.HasNavigationBar="False">
     <ScrollView>
-
         <VerticalStackLayout Margin="0">
             <Frame Padding="0" BorderColor="Transparent">
                 <Grid ColumnDefinitions="100,100,*,55"   Padding="15,20" >
@@ -18,14 +17,12 @@
                     <Button Grid.Column="3" Text="Out" CornerRadius="15" HorizontalOptions="EndAndExpand"  Command="{Binding LogoutCommand}"/>
                 </Grid>
             </Frame>
-
             <Frame BackgroundColor="{StaticResource fourColor}" CornerRadius="15" BorderColor="Transparent" Margin="10,10" x:Name="PopupView" IsVisible="{Binding IsPopupVisible}">
                 <StackLayout>
                     <Editor Placeholder="Your ToDo" PlaceholderColor="Black" FontSize="16" Text="{Binding Todo}" x:Name="ToDoNameEntry"/>
                     <BoxView  HeightRequest="1" Color="{StaticResource Primary}" HorizontalOptions="FillAndExpand" />
                     <Editor Placeholder="Your Description" PlaceholderColor="Black" FontSize="16" Text="{Binding Description}" />
                     <BoxView  HeightRequest="1" Color="{StaticResource Primary}" HorizontalOptions="FillAndExpand" />
-                    
                     <ImageButton Margin="0,10,0,0" Padding="1" HorizontalOptions="EndAndExpand" WidthRequest="30" HeightRequest="30"
                                   Command="{Binding UpdateToDoCommand}">
                         <ImageButton.Source>
@@ -34,18 +31,14 @@
                     </ImageButton>
                 </StackLayout>
             </Frame>
-
             <!--ToDo List-->
-
             <StackLayout>
-
                 <Label Margin="15,7" TextColor="{StaticResource Primary}" Text="To Do List" FontSize="20" FontAttributes="Bold" HorizontalOptions="Start"/>
                 <CollectionView   ItemsSource="{Binding TodoItems}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="models:ToDoLists">
-                            <Frame Padding="10" Margin="10,5"  BackgroundColor="{ StaticResource treeColor}" CornerRadius="15" BorderColor="Transparent">
+                            <Frame Padding="10" Margin="10,5"  BackgroundColor="{ StaticResource twoColor}" CornerRadius="15" BorderColor="Transparent">
                                 <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
-
                                     <Button Margin="5" WidthRequest="17" HeightRequest="17" CornerRadius="2" BorderWidth="2" BorderColor="Transparent" BackgroundColor="{StaticResource fiveColor}"
                                             x:Name="checkBox"
                                             Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainViewModel}},Path=ComplatedCommand}"
@@ -71,28 +64,16 @@
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
-
-
-
                 <!--complated list-->
                 <StackLayout>
-                    <Label Margin="15,30,0,5" TextColor="{StaticResource Primary}" Text="Complated List" FontSize="20" FontAttributes="Bold" HorizontalOptions="Start"/>
+                    <Label Margin="15,30,0,5" TextColor="{StaticResource oneColor}" Text="Complated List" FontSize="20" FontAttributes="Bold" HorizontalOptions="Start"/>
                     <CollectionView  ItemsSource="{Binding Complateda}">
                         <CollectionView.ItemTemplate>
                             <DataTemplate x:DataType="models:ToDoLists">
-                                <Frame Padding="10" CornerRadius="15" Margin="10,5" BorderColor="Transparent" BackgroundColor="{StaticResource twoColor}">
+                                <Frame Padding="10" CornerRadius="15" Margin="10,5" BorderColor="Transparent" BackgroundColor="{StaticResource treeColor}">
                                     <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
-                                        <CheckBox x:Name="checkBox" IsChecked="True" ></CheckBox>
-
-                                        <Label Margin="5,5" Text="{Binding Title}" HorizontalOptions="StartAndExpand" FontSize="14">
-                                            <!--<Label.Triggers>
-                                                        <DataTrigger Binding="{Binding Source={x:Reference checkBox},Path=IsChecked}" TargetType="Label"  Value="True">
-                                                            <Setter Property="TextDecorations" Value="Strikethrough"/>
-                                                        </DataTrigger>
-                                                    </Label.Triggers>-->
-                                        </Label>
-
-
+                                        <CheckBox x:Name="checkBox" IsChecked="True"></CheckBox>
+                                        <Label Margin="5,5" Text="{Binding Title}" TextColor="Black" HorizontalOptions="StartAndExpand" FontSize="14"/>
                                         <ImageButton  HorizontalOptions="EndAndExpand" 
                                          Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainViewModel}},Path=DeleteCommand}"
                                          CommandParameter="{Binding .}"
@@ -103,14 +84,11 @@
                                         </ImageButton>
                                     </StackLayout>
                                 </Frame>
-
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>
                 </StackLayout>
-
             </StackLayout>
-
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

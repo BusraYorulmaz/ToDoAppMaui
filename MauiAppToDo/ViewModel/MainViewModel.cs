@@ -137,7 +137,9 @@ public partial class MainViewModel : ObservableObject
         _selectedToDo.Description= Description;
         if (_selectedToDo == null) return;
         await _toDoListService.UpdateToDoList(_selectedToDo);
-        IsPopupVisible= false;
+        TodoItems.Remove(_selectedToDo);
+        TodoItems.Add(_selectedToDo);
+        IsPopupVisible = false;
     }
 
 
@@ -147,8 +149,7 @@ public partial class MainViewModel : ObservableObject
         Todo = toDoLists.Title;
         Description = toDoLists.Description;
         IsPopupVisible = true;
-
-        _selectedToDo = toDoLists;
+       _selectedToDo = toDoLists;
     }
 
 
